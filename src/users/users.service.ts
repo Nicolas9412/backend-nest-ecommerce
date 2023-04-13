@@ -4,7 +4,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './intefaces/user.interface';
 import { UserDTO } from './dto/user.dto';
 import { hash } from 'bcrypt';
-import { NotAcceptableException } from '@nestjs/common';
+
 @Injectable()
 export class UsersService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
