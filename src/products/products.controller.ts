@@ -11,7 +11,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { ProductDTO } from './dto/product.dto';
+import { ProductCreateDTO } from './dto/productCreate.dto';
+import { ProductUpdateDTO } from './dto/productUpdate.dto';
 import { Roles } from '../roles/roles.decorator';
 import { Role } from '../roles/roles.enum';
 
@@ -20,14 +21,14 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
   @Roles(Role.Admin)
   @Post()
-  async createProduct(@Body() productDTO: ProductDTO, @Res() res) {
+  async createProduct(@Body() productDTO: ProductCreateDTO, @Res() res) {
     const product = await this.productsService.createProduct(productDTO);
     return res.status(HttpStatus.OK).json({ product });
   }
   @Roles(Role.Admin)
   @Put(':id')
   async updateProduct(
-    @Body() productDTO: ProductDTO,
+    @Body() productDTO: ProductUpdateDTO,
     @Param('id') id: string,
     @Res() res,
   ) {
